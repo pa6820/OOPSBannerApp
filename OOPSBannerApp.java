@@ -1,26 +1,13 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class OOPSBannerApp {
-
-    static class CharacterPattern {
-        char character;
-        String[] pattern;
-
-        CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
-
-        public char getCharacter() {
-            return character;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
-    }
 
     public static void main(String[] args) {
 
-        CharacterPattern O = new CharacterPattern('O', new String[]{
+        Map<Character, String[]> patterns = new HashMap<>();
+
+        patterns.put('O', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -30,7 +17,7 @@ public class OOPSBannerApp {
                 " ***** "
         });
 
-        CharacterPattern P = new CharacterPattern('P', new String[]{
+        patterns.put('P', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -40,7 +27,7 @@ public class OOPSBannerApp {
                 "*      "
         });
 
-        CharacterPattern S = new CharacterPattern('S', new String[]{
+        patterns.put('S', new String[]{
                 " ***** ",
                 "*      ",
                 "*      ",
@@ -52,14 +39,18 @@ public class OOPSBannerApp {
 
         String word = "OOPS";
 
-        CharacterPattern[] patterns = {O, P, S};
+        printBanner(word, patterns);
+    }
+
+    public static void printBanner(String word, Map<Character, String[]> patterns) {
 
         for (int i = 0; i < 7; i++) {
             for (char ch : word.toCharArray()) {
-                for (CharacterPattern cp : patterns) {
-                    if (cp.getCharacter() == ch) {
-                        System.out.print(cp.getPattern()[i] + "  ");
-                    }
+
+                String[] pattern = patterns.get(ch);
+
+                if (pattern != null) {
+                    System.out.print(pattern[i] + "  ");
                 }
             }
             System.out.println();
